@@ -1,1 +1,0 @@
-Hello C++! This is a test string.Hello everyone this my first update in the fileHello everyone this my first update.
