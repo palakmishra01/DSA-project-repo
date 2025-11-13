@@ -1,1 +1,202 @@
-
+{
+  "project": {
+    "name": "DSA-project-repo",
+    "description": "Lightweight C++ version-control CLI with Windows batch interface",
+    "version": "1.0.0",
+    "author": "lokeshkaria14",
+    "license": "MIT",
+    "repository": "https://github.com/lokeshkaria14/DSA-project-repo"
+  },
+  "build": {
+    "compiler": "g++",
+    "cppStandard": "c++17",
+    "optimizationLevel": "O2",
+    "outputPath": "./build/main.exe",
+    "sourceFiles": [
+      "src/main.cpp",
+      "src/cli/parser.cpp",
+      "src/cli/commands.cpp",
+      "src/core/utils.cpp",
+      "src/core/diff.cpp",
+      "src/core/patch.cpp",
+      "src/core/repo.cpp",
+      "src/core/version.cpp",
+      "src/core/crypto.cpp",
+      "src/storage/file_manager.cpp",
+      "src/storage/metadata.cpp"
+    ],
+    "headerIncludePath": "./src",
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra"
+    ],
+    "testFiles": [
+      "tests/test_utils.cpp",
+      "tests/test_diff.cpp",
+      "tests/test_repo.cpp",
+      "tests/test_crypto.cpp"
+    ]
+  },
+  "platform": {
+    "primary": "Windows",
+    "shell": "PowerShell",
+    "requirements": [
+      "MinGW-w64 (g++ compiler) or MSVC",
+      "Windows PowerShell 5.1+",
+      "Make (optional, for Makefile support)"
+    ]
+  },
+  "quickStart": {
+    "step1": {
+      "description": "Clone the repository",
+      "command": "git clone https://github.com/lokeshkaria14/DSA-project-repo.git",
+      "action": "Clone repository from GitHub"
+    },
+    "step2": {
+      "description": "Navigate to project directory",
+      "command": "Set-Location 'path\\to\\DSA-project-repo'",
+      "action": "Change to project root"
+    },
+    "step3": {
+      "description": "Build the CLI executable",
+      "command": "g++ -std=c++17 -O2 -Wall -Wextra -I ./src -o .\\build\\main.exe src\\main.cpp src\\cli\\parser.cpp src\\cli\\commands.cpp src\\core\\utils.cpp src\\core\\diff.cpp src\\core\\patch.cpp src\\core\\repo.cpp src\\core\\version.cpp src\\core\\crypto.cpp src\\storage\\file_manager.cpp src\\storage\\metadata.cpp",
+      "alternatives": [
+        "Use the provided Makefile: make",
+        "Use Visual Studio Code tasks (if configured)",
+        "Use Visual Studio project file (if available)"
+      ],
+      "action": "Compile C++ sources to executable"
+    },
+    "step4": {
+      "description": "Run the unified interface",
+      "command": ".\\dsa-unified.bat",
+      "action": "Launch interactive menu for version control operations"
+    },
+    "step5": {
+      "description": "Test the CLI directly (optional)",
+      "command": ".\\build\\main.exe --repo .\\repo init",
+      "action": "Initialize a test repository"
+    }
+  },
+  "fileStructure": {
+    "src": "C++ source files (CLI, core, storage)",
+    "tests": "Unit tests (test_utils, test_diff, test_repo, test_crypto)",
+    "build": "Output directory for compiled executables",
+    "repo": "Default repository storage (created at runtime)",
+    "docs": "Documentation and architecture notes",
+    "scripts": "Helper scripts (build.sh, run_tests.sh, clean_repo.py)"
+  },
+  "commands": {
+    "interactive": {
+      "unix": "./dsa-unified.bat",
+      "windows": ".\\dsa-unified.bat",
+      "description": "Launch unified interactive menu"
+    },
+    "init": {
+      "example": ".\\build\\main.exe init",
+      "description": "Initialize repository"
+    },
+    "commit": {
+      "example": ".\\build\\main.exe commit .\\notes.txt",
+      "description": "Commit a file as a new version"
+    },
+    "log": {
+      "example": ".\\build\\main.exe log",
+      "description": "View commit history"
+    },
+    "diff": {
+      "example": ".\\build\\main.exe diff 0 1",
+      "description": "Compare two versions"
+    },
+    "checkout": {
+      "example": ".\\build\\main.exe checkout 1",
+      "description": "Restore a previous version"
+    },
+    "multiRepo": {
+      "example": ".\\build\\main.exe --repo .\\project1 log",
+      "description": "Target a specific repository with --repo flag"
+    }
+  },
+  "environment": {
+    "requirements": {
+      "compiler": "g++ (MinGW-w64) version 9.0+",
+      "cppVersion": "C++17 or later",
+      "windows": "Windows 7 or later",
+      "powerShell": "PowerShell 5.1+ (comes with Windows 10+)"
+    },
+    "setup": {
+      "windows": {
+        "option1": "Install MinGW-w64 from https://www.mingw-w64.org/",
+        "option2": "Use MSVC compiler (Visual Studio Community Edition)",
+        "option3": "Use Windows Subsystem for Linux (WSL) with g++ installed",
+        "verify": "Open PowerShell and run: g++ --version"
+      }
+    }
+  },
+  "documentation": {
+    "README.md": "Project overview and quick start",
+    "ALL_INSTRUCTIONS.md": "Detailed usage, CLI commands, troubleshooting",
+    "QUICK_REFERENCE.md": "Menu cheat-sheet and common workflows",
+    "UNIFIED_INTERFACE_GUIDE.md": "Menu structure and key features",
+    "REPO_MANAGEMENT_GUIDE.md": "Multi-repository management and --repo flag usage",
+    "docs/architecture.md": "System design and component overview"
+  },
+  "troubleshooting": {
+    "issue_1": {
+      "problem": "g++ command not found",
+      "solution": "Install MinGW-w64 and add it to system PATH",
+      "reference": "https://www.mingw-w64.org/downloads/"
+    },
+    "issue_2": {
+      "problem": "main.exe not created after build",
+      "solution": "Check that build/ directory exists; create manually if needed",
+      "command": "mkdir build"
+    },
+    "issue_3": {
+      "problem": "dsa-unified.bat fails to execute",
+      "solution": "Ensure you are in the project root directory; use .\\dsa-unified.bat not dsa-unified.bat"
+    },
+    "issue_4": {
+      "problem": "Cannot commit file (file not found error)",
+      "solution": "Ensure file path is correct; use .\\filename.txt format on Windows"
+    },
+    "issue_5": {
+      "problem": "Repository not found when using --repo",
+      "solution": "Use relative path with ./ or .\\ prefix; example: .\\build\\main.exe --repo .\\project1 log"
+    }
+  },
+  "testing": {
+    "runAllTests": {
+      "command": "cd tests; g++ test_utils.cpp -I ..\\src -o test_utils; .\\test_utils",
+      "description": "Build and run individual test files"
+    },
+    "testFiles": [
+      "tests/test_utils.cpp",
+      "tests/test_diff.cpp",
+      "tests/test_repo.cpp",
+      "tests/test_crypto.cpp"
+    ],
+    "expectedOutput": "All tests should compile successfully and pass without errors"
+  },
+  "features": [
+    "Initialize version-control repositories",
+    "Commit files with automatic diff generation",
+    "View commit history with timestamps and hashes",
+    "Compare versions and inspect diffs",
+    "Restore (checkout) previous versions",
+    "Multi-repository support with --repo flag",
+    "Interactive Windows batch menu",
+    "Cross-platform CLI interface"
+  ],
+  "nextSteps": [
+    "Read README.md for project overview",
+    "Run .\\dsa-unified.bat to launch interactive menu",
+    "Create your first repository (Menu option 1)",
+    "Create a test file (Menu option 12)",
+    "Commit the file (Menu option 6)",
+    "View history (Menu option 7)",
+    "See ALL_INSTRUCTIONS.md for detailed commands"
+  ]
+}
