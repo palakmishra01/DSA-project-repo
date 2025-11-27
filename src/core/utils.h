@@ -19,4 +19,9 @@ namespace Utils {
 
     // Split string into lines
     std::vector<std::string> splitLines(const std::string& text);
+
+    // File system operations
+    bool fileExists(const std::string& path);
+    bool directoryExists(const std::string& path);
+    bool createDirectory(const std::string& path);
 }

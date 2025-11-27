@@ -1,0 +1,27 @@
+{
+  "name": "dsa-project-repo",
+  "version": "1.0.0",
+  "description": "Lightweight C++ version-control CLI with Windows batch interface",
+  "main": "build/main.exe",
+  "scripts": {
+    "build": "g++ -std=c++17 -O2 -Wall -Wextra -I ./src -o ./build/main.exe src/main.cpp src/cli/parser.cpp src/cli/commands.cpp src/core/utils.cpp src/core/diff.cpp src/core/patch.cpp src/core/repo.cpp src/core/version.cpp src/core/crypto.cpp src/storage/file_manager.cpp src/storage/metadata.cpp",
+    "clean": "rimraf build repo",
+    "test": "make all",
+    "setup": "mkdir -p build && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lokeshkaria14/DSA-project-repo.git"
+  },
+  "keywords": [
+    "version-control",
+    "cli",
+    "cpp",
+    "git-like",
+    "dsa"
+  ],
+  "author": "lokeshkaria14",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}

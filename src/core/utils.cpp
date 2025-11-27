@@ -5,6 +5,14 @@
 #include <iomanip>
 #include <ctime>
 #include <algorithm>
+#include <sys/stat.h>
+
+#ifdef _WIN32
+#include <direct.h>
+#define mkdir(path, mode) _mkdir(path)
+#else
+#include <sys/types.h>
+#endif
 
 namespace Utils {
 
@@ -59,6 +67,20 @@ std::vector<std::string> splitLines(const std::string& text) {
         lines.push_back(line);
     }
     return lines;
+}
+
+bool fileExists(const std::string& path) {
+    struct stat buffer;
+    return (stat(path.c_str(), &buffer) == 0 && S_ISREG(buffer.st_mode));
+}
+
+bool directoryExists(const std::string& path) {
+    struct stat buffer;
+    return (stat(path.c_str(), &buffer) == 0 && S_ISDIR(buffer.st_mode));
+}
+
+bool createDirectory(const std::string& path) {
+    return mkdir(path.c_str(), 0755) == 0 || directoryExists(path);
 }
 
 } // namespace Utils
