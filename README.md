@@ -29,7 +29,7 @@ This project demonstrates a simple but functional version-control system built i
 ### 1. Clone & Enter Project
 
 ```powershell
-git clone https://github.com/lokeshkaria14/DSA-project-repo.git
+git clone https://github.com/palakmishra01/DSA-project-repo
 cd DSA-project-repo
 ```
 
@@ -256,18 +256,7 @@ Create repo1  Create repo2  Switch  Commit  Switch  Compare
 
 ---
 
-##  License
-
-MIT License — See LICENSE file for details
-
----
-
-##  Author
-
-**lokeshkaria14**
-
----
-
+ 
 ##  Links
 
 - **Repository:** https://github.com/lokeshkaria14/DSA-project-repo

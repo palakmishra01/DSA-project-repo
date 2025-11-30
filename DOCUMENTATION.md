@@ -84,7 +84,7 @@ You need:
 #### Step 1: Clone Repository
 
 ```powershell
-git clone https://github.com/lokeshkaria14/DSA-project-repo.git
+git clone https://github.com/palakmishra01/DSA-project-repo
 cd DSA-project-repo
 ```
 
@@ -764,17 +764,11 @@ DSA-project-repo/
 
 ---
 
-## License
-
-MIT
-
-## Author
-
-lokeshkaria14
+ 
 
 ## Repository
 
-https://github.com/lokeshkaria14/DSA-project-repo
+https://github.com/palakmishra01/DSA-project-repo
 
 ---
 
