@@ -32,6 +32,9 @@ public:
     // Restore (checkout) a specific version
     void checkout(int versionID);
 
+    // Rollback to a specific version (reconstruct and save file)
+    void rollback(int versionID, const std::string& outputFilePath);
+
     // Get current repository path
     std::string getRepoPath() const;
 };

@@ -266,10 +266,41 @@ goto main_menu
 
 :checkout_version
 echo.
-set /p vid="Enter version ID to restore: "
+echo ┌────────────────────────────────────────────────────────────────┐
+echo │              Restore/Rollback Version                          │
+echo └────────────────────────────────────────────────────────────────┘
+echo.
+echo Choose restore option:
+echo   1. View version (Checkout - display only)
+echo   2. Rollback version (Save to file)
+echo.
+set /p restore_choice="Enter your choice (1-2): "
+
+if "%restore_choice%"=="1" goto checkout_view
+if "%restore_choice%"=="2" goto rollback_save
+
+echo Invalid choice. Returning to main menu.
+pause
+goto main_menu
+
+:checkout_view
+echo.
+set /p vid="Enter version ID to view: "
 echo Checking out version !vid! from !ACTIVE_REPO!...
 echo.
 .\build\main.exe --repo "!ACTIVE_REPO!" checkout !vid!
+echo.
+pause
+goto main_menu
+
+:rollback_save
+echo.
+set /p vid="Enter version ID to rollback to: "
+set /p outfile="Enter output file path (e.g., restored.txt): "
+echo.
+echo Rolling back to version !vid! from !ACTIVE_REPO!...
+echo.
+.\build\main.exe --repo "!ACTIVE_REPO!" rollback !vid! "!outfile!"
 echo.
 pause
 goto main_menu

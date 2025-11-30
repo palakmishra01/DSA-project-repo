@@ -45,7 +45,16 @@ void executeCommand(Repo& repo, const Command& cmd) {
         }
         int versionID = std::stoi(cmd.args[0]);
         repo.checkout(versionID);
-    } 
+    }
+    else if (cmd.name == "rollback") {
+        if (cmd.args.size() < 2) {
+            std::cerr << "Usage: rollback <versionID> <output_file_path>\n";
+            return;
+        }
+        int versionID = std::stoi(cmd.args[0]);
+        std::string outputFilePath = cmd.args[1];
+        repo.rollback(versionID, outputFilePath);
+    }
     else {
         std::cerr << "Unknown command: " << cmd.name << "\n";
     }

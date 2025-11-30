@@ -151,6 +151,79 @@ void Repo::checkout(int versionID) {
     std::cout << "Timestamp: " << versions[versionID].timestamp << "\n";
 }
 
+void Repo::rollback(int versionID, const std::string& outputFilePath) {
+    if (!Utils::directoryExists(repoPath)) {
+        std::cerr << "Error: Repository not initialized.\n";
+        return;
+    }
+
+    loadVersions();
+
+    if (versionID < 0 || versionID >= (int)versions.size()) {
+        std::cerr << "Error: Invalid version ID.\n";
+        return;
+    }
+
+    // Reconstruct the full text by applying diffs sequentially
+    std::string reconstructedText = "";
+
+    for (int i = 0; i <= versionID; ++i) {
+        std::string diffContent = Utils::readFile(versions[i].diffPath);
+        auto diffLines = Utils::splitLines(diffContent);
+
+        if (i == 0) {
+            // First version: extract all added lines
+            for (const auto& line : diffLines) {
+                if (!line.empty() && line[0] == '+') {
+                    reconstructedText += line.substr(2) + "\n";
+                }
+            }
+        } else {
+            // Apply diff to current text
+            auto currentLines = Utils::splitLines(reconstructedText);
+            std::vector<std::string> newLines;
+            size_t currentIdx = 0;
+
+            for (const auto& diffLine : diffLines) {
+                if (diffLine.empty()) continue;
+
+                if (diffLine[0] == '-') {
+                    // Line removed - skip the corresponding line in current text
+                    if (currentIdx < currentLines.size()) {
+                        ++currentIdx;
+                    }
+                } else if (diffLine[0] == '+') {
+                    // Line added
+                    newLines.push_back(diffLine.substr(2));
+                }
+            }
+
+            // Add remaining lines from current text
+            while (currentIdx < currentLines.size()) {
+                newLines.push_back(currentLines[currentIdx]);
+                ++currentIdx;
+            }
+
+            reconstructedText = Utils::joinLines(newLines);
+        }
+    }
+
+    // Save reconstructed text to output file
+    if (Utils::writeFile(outputFilePath, reconstructedText)) {
+        std::cout << "Successfully rolled back to version " << versionID << "\n";
+        std::cout << "File saved to: " << outputFilePath << "\n";
+        std::cout << "Original version hash: " << versions[versionID].hash << "\n";
+        std::cout << "Original version timestamp: " << versions[versionID].timestamp << "\n";
+
+        // Commit the rolled back content as a new version
+        std::cout << "\nCommitting rolled back content as new version...\n";
+        commit(reconstructedText);
+        std::cout << "Rollback committed successfully! This is now the current version.\n";
+    } else {
+        std::cerr << "Error: Failed to write file to " << outputFilePath << "\n";
+    }
+}
+
 std::string Repo::getRepoPath() const {
     return repoPath;
 }

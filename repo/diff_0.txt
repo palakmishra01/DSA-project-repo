@@ -1,1 +1,0 @@
-+ Hello World\nThis is a test file\nVersion 1

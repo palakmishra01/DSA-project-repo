@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(g++:*)"
+      "Bash(g++:*)",
+      "Bash(./build/main.exe commit:*)"
     ],
     "deny": [],
     "ask": []
